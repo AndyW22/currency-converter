@@ -161,7 +161,6 @@ export default function Index() {
   }, [fetcher]);
 
   useEffect(() => {
-    console.log(fromCurrency, exchangeRate);
     if (lastEdited === 'from' && fromAmount) {
       const calculated = (parseFloat(fromAmount) * exchangeRate).toFixed(2);
       setToAmount(isNaN(parseFloat(calculated)) ? '' : calculated);
