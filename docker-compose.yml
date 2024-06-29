@@ -8,9 +8,8 @@ services:
     environment:
       - NODE_ENV=production
       - DATABASE_PATH=/data/data.db
+      - EXCHANGE_RATE_BASE_URL=https://open.er-api.com/v6/latest
     volumes:
-      - ./app:/usr/src/app/app
-      - ./public:/usr/src/app/public
       - db-data:/data
 volumes:
   db-data:

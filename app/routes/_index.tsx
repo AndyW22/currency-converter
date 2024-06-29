@@ -137,7 +137,6 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export default function Index() {
-  // const initialData = useLoaderData<typeof loader>();
   const currencies = useLoaderData<typeof loader>();
   const fetcher = useFetcher<typeof action>();
 
@@ -152,6 +151,7 @@ export default function Index() {
     if (fromCurrency && toCurrency) {
       fetcher.submit({ fromCurrency, toCurrency }, { method: 'post' });
     }
+    /* eslint-disable react-hooks/exhaustive-deps */
   }, [fromCurrency, toCurrency]);
 
   useEffect(() => {
@@ -161,6 +161,7 @@ export default function Index() {
   }, [fetcher]);
 
   useEffect(() => {
+    console.log(fromCurrency, exchangeRate);
     if (lastEdited === 'from' && fromAmount) {
       const calculated = (parseFloat(fromAmount) * exchangeRate).toFixed(2);
       setToAmount(isNaN(parseFloat(calculated)) ? '' : calculated);
@@ -191,8 +192,8 @@ export default function Index() {
   };
 
   return (
-    <div className='max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-xl'>
-      <h1 className='text-2xl font-bold mb-6 text-center'>
+    <div className='max-w-md mx-auto mt-10 p-6 bg-slate-800 rounded-lg shadow-xl'>
+      <h1 className='text-2xl font-bold mb-6 text-center text-white'>
         Currency Converter
       </h1>
       <div className='space-y-4'>
@@ -200,7 +201,7 @@ export default function Index() {
           <div className='flex-1'>
             <label
               htmlFor='fromAmount'
-              className='block text-sm font-medium text-gray-700'
+              className='block text-sm font-medium text-white'
             >
               From Amount
             </label>
@@ -209,13 +210,13 @@ export default function Index() {
               id='fromAmount'
               value={fromAmount}
               onChange={handleFromAmountChange}
-              className='mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+              className='mt-1 p-1 block w-full rounded-md bg-gray-800 text-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 outline outline-1 outline-gray-600'
             />
           </div>
           <div className='flex-1'>
             <label
               htmlFor='fromCurrency'
-              className='block text-sm font-medium text-gray-700'
+              className='block text-sm font-medium text-white'
             >
               From Currency
             </label>
@@ -223,7 +224,7 @@ export default function Index() {
               id='fromCurrency'
               value={fromCurrency}
               onChange={handleFromCurrencyChange}
-              className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+              className='mt-1 p-1 block w-full rounded-md border-gray-600 bg-gray-800 text-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 outline outline-1 outline-gray-600'
             >
               {currencies?.currencyCodes?.map((currency) => (
                 <option key={currency} value={currency}>
@@ -237,7 +238,7 @@ export default function Index() {
           <div className='flex-1'>
             <label
               htmlFor='toAmount'
-              className='block text-sm font-medium text-gray-700'
+              className='block text-sm font-medium text-white'
             >
               To Amount
             </label>
@@ -246,13 +247,13 @@ export default function Index() {
               id='toAmount'
               value={toAmount}
               onChange={handleToAmountChange}
-              className='mt-1 p-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+              className='mt-1 p-1 block w-full rounded-md bg-gray-800 text-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 outline outline-1 outline-gray-600'
             />
           </div>
           <div className='flex-1'>
             <label
               htmlFor='toCurrency'
-              className='block text-sm font-medium text-gray-700'
+              className='block text-sm font-medium text-white'
             >
               To Currency
             </label>
@@ -260,7 +261,7 @@ export default function Index() {
               id='toCurrency'
               value={toCurrency}
               onChange={handleToCurrencyChange}
-              className='mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50'
+              className='mt-1 p-1 block w-full rounded-md bg-gray-800 text-white shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50 outline outline-1 outline-gray-600'
             >
               {currencies?.currencyCodes?.map((currency) => (
                 <option key={currency} value={currency}>
@@ -271,9 +272,9 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className='mt-6 p-4 bg-green-100 rounded-md'>
-        <p className='text-sm text-green-600'>
-          Exchange Rate: 1 {fromCurrency} = {exchangeRate.toFixed(4)}{' '}
+      <div className='mt-6 p-4 bg-green-900 rounded-md'>
+        <p className='text-sm text-green-200'>
+          Exchange Rate: 1 {fromCurrency} = {exchangeRate.toFixed(4)}
           {toCurrency}
         </p>
       </div>
