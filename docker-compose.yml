@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  currency-converter:
+    container_name: currency-converter
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - NODE_ENV=production
+      - DATABASE_PATH=/data/data.db
+    volumes:
+      - ./app:/usr/src/app/app
+      - ./public:/usr/src/app/public
+      - db-data:/data
+volumes:
+  db-data:
