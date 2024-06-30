@@ -273,7 +273,7 @@ export default function Index() {
       </div>
       <div className='mt-6 p-4 bg-green-900 rounded-md'>
         <p className='text-sm text-green-200'>
-          Exchange Rate: 1 {fromCurrency} = {exchangeRate.toFixed(4)}
+          Exchange Rate: 1 {fromCurrency} = {exchangeRate.toFixed(4)}{' '}
           {toCurrency}
         </p>
       </div>
